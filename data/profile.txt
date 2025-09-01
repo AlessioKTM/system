@@ -1,0 +1,3 @@
+user_root_dir=c:\data\business\active
+background_process=NULL
+last_reboot_time=00:00:00
