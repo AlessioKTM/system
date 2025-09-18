@@ -16,17 +16,17 @@ void runBackgroundService() {
 	Logger logger; 
 	logger.SetFileLog("c:\\data\\system\\data");
 	
-	logger.Log("#==========#\n");
-	logger.Log("Background service booted at time: [" + getTime_now() + "]\n");
+	logger.Log("#==========#");
+	logger.Log("Background service booted at -> TIME: [" + getTime_now() + "] and DAY: [" + getDay_today() + "]");
 	
 	vector<string> exes;
 	string search = "main.py";
 	getExecutables_fromDir(search, profile.userRootDir, exes);
 	
-	logger.Log("Executables got it from {" + profile.userRootDir + "} to search {" + search + "}\n");
+	logger.Log("Executables got it from [" + profile.userRootDir + "] to search [" + search + "]");
 	for (auto& exe : exes) {
 		exe = "python " + exe;
-		logger.Log(" " + exe + "\n");
+		logger.Log(" " + exe + "");
 	}
 	
 	vector<DWORD> pids;
@@ -36,29 +36,30 @@ void runBackgroundService() {
 	string priority = "BELOW_NORMAL_PRIORITY_CLASS";
 	while (true) {
 		if (profile.lastRebootTime == getTime_now()) {
-			logger.Log("About to close processes\n");
+			logger.Log("About to close processes");
 			manager.TerminateAllProcesses();
 			
-			logger.Log("About to reboot pc at time: [" + getTime_now() + "]\n");
+			logger.Log("About to reboot pc at time: [" + getTime_now() + "]");
+			logger.ClearLog();
 			rebootPC();
 		}
 		
 		if (isUserActive(300)) {
-			logger.Log("User online\n");
+			logger.Log("User on pc");
 			
-			if (priority == "BELOW_NORMAL_PRIORITY_CLASS") {
-				for (auto& pid : pids) manager.SetProcessPriority(pid, HIGH_PRIORITY_CLASS); 
-				priority = "HIGH_PRIORITY_CLASS";
-			}
-		} else {
-			logger.Log("User offline\n");
-			
-			if (priority == "HIGH_PRIORITY_CLASS") {
-				for (auto& pid : pids) manager.SetProcessPriority(pid, BELOW_NORMAL_PRIORITY_CLASS);		
+			if (priority != "BELOW_NORMAL_PRIORITY_CLASS") {
+				for (auto& pid : pids) manager.SetProcessPriority(pid, BELOW_NORMAL_PRIORITY_CLASS); 
 				priority = "BELOW_NORMAL_PRIORITY_CLASS";
 			}
+		} else {
+			logger.Log("User off pc");
+			
+			if (priority != "HIGH_PRIORITY_CLASS") {
+				for (auto& pid : pids) manager.SetProcessPriority(pid, HIGH_PRIORITY_CLASS);
+				priority = "HIGH_PRIORITY_CLASS";	
+			}
 		}
-		logger.Log("\n Processes setted at priority -> " + priority + "\n");
+		logger.Log("Processes setted at priority -> " + priority);
 		sleepfor(1);
 	}
 }

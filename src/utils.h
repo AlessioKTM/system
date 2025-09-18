@@ -103,6 +103,23 @@ inline wstring getCurrentDir() {
 	return fullPath.substr(0, pos);
 }
 
+inline string getDay_today() {
+	long long int today = time(nullptr);
+	string today_string = ctime(&today);
+	
+	stringstream ss(today_string);
+	string dayOfWeek, month, day, tmp, year;
+	
+	getline(ss, dayOfWeek, ' ');
+	getline(ss, month, ' ');
+	getline(ss, day, ' ');
+	getline(ss, tmp, ' ');
+	getline(ss, year, ' ');
+	
+	string result = day + "." + month + "." + year;
+	return result;
+}
+
 inline string getTime_now() {
 	long long int now = time(nullptr);
 	string now_string = ctime(&now);

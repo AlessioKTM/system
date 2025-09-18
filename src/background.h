@@ -9,18 +9,3 @@
 inline void rebootPC() {
 	system("shutdown /r /t 0");
 }
-
-/*
-struct Paths {
-    wstring projectRoot;
-    wstring executablePath;
-	wstring userProfilePath;   
-    wstring executablesList;
-};
-
-struct Profile {
-    string userRootDir;
-    string backgroundProcess;
-    string lastRebootTime;
-};
-*/

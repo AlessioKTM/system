@@ -25,6 +25,11 @@ class Logger {
 			fclose(f);
 		}
 		
+		void ClearLog() {
+			FILE* f = fopen(where.c_str(), "w");
+			fclose(f);
+		}
+		
 	private:
 		string where;
 };
