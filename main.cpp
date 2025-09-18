@@ -14,17 +14,20 @@ void runBackgroundService() {
 	auto path = getPaths();
 	
 	Logger logger; 
-	logger.SetFileLog(ws2s(path.userProfilePath));
+	logger.SetFileLog("c:\\data\\system\\data");
 	
-	logger.Log("#==========#\n");	
+	logger.Log("#==========#\n");
 	logger.Log("Background service booted at time: [" + getTime_now() + "]\n");
 	
 	vector<string> exes;
-	string search = "main.exe";
+	string search = "main.py";
 	getExecutables_fromDir(search, profile.userRootDir, exes);
 	
 	logger.Log("Executables got it from {" + profile.userRootDir + "} to search {" + search + "}\n");
-	for (auto& exe : exes) logger.Log(" " + exe + "\n");
+	for (auto& exe : exes) {
+		exe = "python " + exe;
+		logger.Log(" " + exe + "\n");
+	}
 	
 	vector<DWORD> pids;
 	ProcessManager manager;
