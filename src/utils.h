@@ -117,6 +117,7 @@ inline string getDay_today() {
 	getline(ss, year, ' ');
 	
 	string result = day + "." + month + "." + year;
+	result = strip(result);
 	return result;
 }
 

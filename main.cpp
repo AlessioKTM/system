@@ -59,8 +59,14 @@ void runBackgroundService() {
 				priority = "HIGH_PRIORITY_CLASS";	
 			}
 		}
+		
+		vector<DWORD> aliveProcesses = manager.GetActiveProcesses();
+		
 		logger.Log("Processes setted at priority -> " + priority);
-		sleepfor(1);
+		logger.Log("Alive process: ");
+		for (auto& pid : aliveProcesses) logger.Log(" -> " + to_string(pid));
+		
+		sleepfor(5);
 	}
 }
 
@@ -78,7 +84,7 @@ int main(int argc, char* argv[]) {
 	
 	if (isBackground) {
 		HWND hWindow = GetConsoleWindow();
-		ShowWindow(hWindow, SW_HIDE);	
+		ShowWindow(hWindow, SW_HIDE);
 		runBackgroundService();
 	} else {
 		string result = runUserService();
