@@ -16,7 +16,6 @@ void runBackgroundService() {
 	Logger logger; 
 	logger.SetFileLog("c:\\data\\system\\data");
 	
-	logger.Log("#==========#");
 	logger.Log("Background service booted at -> TIME: [" + getTime_now() + "] and DAY: [" + getDay_today() + "]");
 	
 	vector<string> exes;
@@ -44,7 +43,7 @@ void runBackgroundService() {
 			rebootPC();
 		}
 		
-		if (isUserActive(300)) {
+		if (isUserActive(300) == true) {
 			logger.Log("User on pc");
 			
 			if (priority != "BELOW_NORMAL_PRIORITY_CLASS") {

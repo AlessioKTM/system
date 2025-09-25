@@ -1,11 +1,11 @@
 #==========#
-Background service booted at -> TIME: [17:56:05] and DAY: [24.Sep.2025]
+Background service booted at -> TIME: [19:57:45] and DAY: [25.Sep.2025]
 Executables got it from [c:\data\business\active] to search [main.py]
  python c:\data\business\active\requirements_generator\main.py
  python c:\data\business\active\videoAutomation_yt_v2-2\main.py
 User on pc
 Processes setted at priority -> BELOW_NORMAL_PRIORITY_CLASS
 Alive process: 
- -> 11820
- -> 11952
+ -> 12760
+ -> 12768
 User on pc

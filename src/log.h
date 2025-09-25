@@ -9,11 +9,13 @@ class Logger {
 	public:
 		Logger() = default;
 		
-		void SetFileLog(const string& filepath) {		
+		void SetFileLog(const string& filepath) {
 			string full_filepath = filepath + "\\log.txt";
-			FILE* f = fopen(full_filepath.c_str(), "w");
-			
 			where = full_filepath;
+			
+			FILE* f = fopen(where.c_str(), "a");
+			fprintf(f, "# ===== ===== ===== ===== ===== #\n");
+			
 			fclose(f);
 		}
 		
